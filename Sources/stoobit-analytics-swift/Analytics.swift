@@ -10,7 +10,8 @@ import Foundation
 @MainActor open class Analytics {
     public static let app = Analytics()
     
-    public func initialize(with key: String) {
+    public typealias Key = String
+    public func initialize(with key: Key) {
         
     }
 }
