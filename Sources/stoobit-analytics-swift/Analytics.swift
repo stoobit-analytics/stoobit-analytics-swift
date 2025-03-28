@@ -8,5 +8,9 @@
 import Foundation
 
 @MainActor open class Analytics {
-    static let main = Analytics()
+    public static let app = Analytics()
+    
+    public func initialize(with key: String) {
+        
+    }
 }
