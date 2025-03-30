@@ -7,11 +7,8 @@
 
 import Foundation
 
-@MainActor open class Analytics {
-    public static let app = Analytics()
+open class Analytics {
+    public static let instance = Analytics()
     
-    public typealias Key = String
-    public func initialize(with key: Key) {
-        
-    }
 }
+
