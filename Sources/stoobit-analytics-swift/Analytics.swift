@@ -71,7 +71,7 @@ open class Analytics {
     public static func track(_ event: String, properties: [String: Any] = [:]) {
         do {
             let defaultData = try JSONSerialization.data(
-                withJSONObject: Data(), options: [] // TODO
+                withJSONObject: [], options: [] // TODO
             )
             
             let customData = try JSONSerialization.data(
