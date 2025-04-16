@@ -12,7 +12,6 @@ import Foundation
 struct Test {
     @Test func test() async throws {
         guard let url = URL(string: "http://localhost:3456/track") else {
-            #expect(1 == 2)
             return
         }
          
@@ -28,29 +27,9 @@ struct Test {
             "application/json", forHTTPHeaderField: "Content-Type"
         )
         
-        let defaultProps: [String: Any] = [
-            "name": "Props",
-            "value": 42
-        ]
-
-        let defaultPropsData = try JSONSerialization.data(
-            withJSONObject: defaultProps, options: []
-        )
-        
-        let customPropsData = try JSONSerialization.data(
-            withJSONObject: [], options: []
-        )
-        
-        // JSON Body
-        let event = Event(
-            name: "Note Created",
-            defaultProps: defaultPropsData,
-            customProps: customPropsData
-        )
-        
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        request.httpBody = try encoder.encode([event])
+//        request.httpBody = try encoder.encode([event])
         
         // Start Request
         let (data, response) = try await URLSession.shared.data(for: request)

@@ -5,6 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "stoobit-analytics-swift",
+    platforms: [
+        .iOS(.v12),
+        .tvOS(.v12),
+        .macOS(.v12),
+        .watchOS(.v9),
+        .visionOS(.v1)
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
