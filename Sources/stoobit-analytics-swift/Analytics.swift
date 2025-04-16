@@ -14,7 +14,7 @@ open class Analytics {
     public static let shared = Analytics()
     
     // Analytics Properties
-    let url = URL(string: "http://localhost:3456/track")!
+    let url = URL(string: "https://analyticsapi.stoobit.com/track")!
     
     internal var key: String = ""
     internal var events: [Event] = []
