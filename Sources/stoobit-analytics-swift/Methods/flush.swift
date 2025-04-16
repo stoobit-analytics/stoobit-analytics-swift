@@ -35,14 +35,28 @@ extension AnalyticsActor {
                 }
                 
                 self.events.removeAll()
+                
+                #if DEBUG
+                dump(
+                    "🟢 Sending data to stoobit analytics was successful.",
+                    name: "stoobit analytics"
+                )
+                #endif
+            } else {
+                #if DEBUG
+                dump(
+                    "🟡 Nothing to flush.",
+                    name: "stoobit analytics"
+                )
+                #endif
             }
         } catch {
-#if DEBUG
+            #if DEBUG
             dump(
-                "Sending data to stoobit analytics failed.",
+                "🔴 Sending data to stoobit analytics failed.",
                 name: "stoobit analytics"
             )
-#endif
+            #endif
         }
     }
 }

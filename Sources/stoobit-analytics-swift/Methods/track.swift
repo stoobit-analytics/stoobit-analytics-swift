@@ -28,7 +28,7 @@ extension AnalyticsActor {
         } catch {
 #if DEBUG
             dump(
-                "Converting provided properties to JSON failed.",
+                "🔴 Converting provided properties to JSON failed.",
                 name: "stoobit analytics"
             )
 #endif
