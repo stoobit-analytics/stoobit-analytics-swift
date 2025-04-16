@@ -32,8 +32,14 @@ open class Analytics {
                         do {
                             try await Analytics.flush()
                             self.instance.events.removeAll()
-                        } catch { }
+                            
+                            print("🟢 Flush Successful")
+                        } catch {
+                            print("🔴 Flush Failed")
+                        }
                     }
+                } else {
+                    print("🟡 Nothing to Flush")
                 }
             }
     }
