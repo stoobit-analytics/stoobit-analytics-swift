@@ -13,7 +13,7 @@ struct Event: Codable {
         self.defaultProps = defaultProps
         self.customProps = customProps
         
-        self.time = Date.now
+        self.time = Date()
     }
     
     let name: String
