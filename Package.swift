@@ -6,8 +6,8 @@ import PackageDescription
 let package = Package(
     name: "stoobit-analytics-swift",
     platforms: [
-        .iOS(.v12),
-        .tvOS(.v12),
+        .iOS(.v13),
+        .tvOS(.v13),
         .macOS(.v12),
         .watchOS(.v9),
         .visionOS(.v1)
