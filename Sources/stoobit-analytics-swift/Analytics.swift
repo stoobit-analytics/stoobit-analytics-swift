@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-class Analytics {
+open class Analytics {
     // Shared Instance
     public static let shared = Analytics()
     
