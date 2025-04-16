@@ -19,7 +19,7 @@ class Analytics {
     internal var events: [Event] = []
     
     // Initialization
-    static func initialize(with key: Key, interval: TimeInterval = 60) {
+    public static func initialize(with key: Key, interval: TimeInterval = 60) {
         Analytics.shared.key = key
         
         Timer
