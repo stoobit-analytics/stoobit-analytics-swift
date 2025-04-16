@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension AnalyticsActor {
-    func track(_ event: String, properties: [String: Any]) {
+extension Analytics {
+    public static func track(_ event: String, properties: [String: Any] = [:]) {
         do {
             let defaultData = try JSONSerialization.data(
                 withJSONObject: [], options: [] // TODO
@@ -24,7 +24,7 @@ extension AnalyticsActor {
                 customProps: customData
             )
             
-            self.events.append(event)
+            Analytics.shared.events.append(event)
         } catch {
 #if DEBUG
             dump(

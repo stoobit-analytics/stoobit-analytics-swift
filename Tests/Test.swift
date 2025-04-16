@@ -10,7 +10,5 @@ import Foundation
 @testable import Analytics
 
 struct Test {
-    @Test func test() {
-    
-    }
+    @Test func test() async throws { }
 }

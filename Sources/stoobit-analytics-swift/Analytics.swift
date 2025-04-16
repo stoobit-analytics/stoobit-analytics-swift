@@ -1,31 +1,33 @@
 //
-//  File.swift
+//  stoobit_analytics_swift.swift
 //  stoobit-analytics-swift
 //
-//  Created by Till Brügmann on 16.04.25.
+//  Created by Till Brügmann on 27.03.25.
 //
 
 import Foundation
 
-public struct Analytics {
-    public static func initialize(with key: Key, interval: TimeInterval = 60) {
-        Task {
-            await AnalyticsActor.shared
-                .initialize(with: key, interval: interval)
-        }
-    }
+@MainActor
+class Analytics {
+    // Shared Instance
+    public static let shared = Analytics()
     
-    public static func flush() {
-        Task {
-            await AnalyticsActor.shared
-                .flush()
-        }
-    }
+    // Analytics Properties
+    let url = URL(string: "http://localhost:3456/track")!
     
-    public static func track(_ event: String, properties: [String: Any] = [:]) {
-        Task {
-            await AnalyticsActor.shared
-                .track(event, properties: properties)
-        }
+    internal var key: String = ""
+    internal var events: [Event] = []
+    
+    // Initialization
+    static func initialize(with key: Key, interval: TimeInterval = 60) {
+        Analytics.shared.key = key
+        
+        Timer
+            .scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
+                Task { @MainActor in
+                    flush()
+                }
+            }
     }
 }
+
