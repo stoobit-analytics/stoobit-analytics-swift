@@ -27,11 +27,13 @@ open class Analytics {
     private static func schedule(interval: TimeInterval) {
         Timer
             .scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
-                Task {
-                    do {
-                        try await Analytics.flush()
-                        self.instance.events.removeAll()
-                    } catch { }
+                if self.instance.events.isEmpty == false {
+                    Task {
+                        do {
+                            try await Analytics.flush()
+                            self.instance.events.removeAll()
+                        } catch { }
+                    }
                 }
             }
     }
