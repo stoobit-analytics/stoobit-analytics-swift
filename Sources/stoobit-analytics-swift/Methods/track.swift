@@ -11,7 +11,7 @@ extension Analytics {
     public static func track(_ event: String, properties: [String: Any] = [:]) {
         do {
             let defaultData = try JSONSerialization.data(
-                withJSONObject: [], options: [] // TODO
+                withJSONObject: self.properties(), options: []
             )
             
             let customData = try JSONSerialization.data(
