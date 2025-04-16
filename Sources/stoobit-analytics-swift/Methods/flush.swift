@@ -41,27 +41,14 @@ extension Analytics {
                     
                     Analytics.shared.events.removeAll()
                     
-#if DEBUG
-                    dump(
-                        "🟢 Sending data to stoobit analytics was successful.",
-                        name: "stoobit analytics"
+                    analyticsLogger.info(
+                        "Analytics flushed successfully."
                     )
-#endif
-                } else {
-#if DEBUG
-                    dump(
-                        "🟡 Nothing to flush.",
-                        name: "stoobit analytics"
-                    )
-#endif
                 }
             } catch {
-#if DEBUG
-                dump(
-                    "🔴 Sending data to stoobit analytics failed.",
-                    name: "stoobit analytics"
+                analyticsLogger.error(
+                    "Sending data to stoobit analytics failed."
                 )
-#endif
             }
         }
     }

@@ -26,12 +26,9 @@ extension Analytics {
             
             Analytics.shared.events.append(event)
         } catch {
-#if DEBUG
-            dump(
-                "🔴 Converting provided properties to JSON failed.",
-                name: "stoobit analytics"
+            analyticsLogger.error(
+                "Converting provided properties to JSON failed."
             )
-#endif
         }
     }
 }

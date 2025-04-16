@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os
 
 @MainActor
 open class Analytics {
@@ -21,6 +22,7 @@ open class Analytics {
     // Initialization
     public static func initialize(with key: Key, interval: TimeInterval = 60) {
         Analytics.shared.key = key
+        analyticsLogger.info("Analytics initialized successfully.")
         
         Timer
             .scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
@@ -31,3 +33,7 @@ open class Analytics {
     }
 }
 
+// Logger
+internal let analyticsLogger = Logger(
+    subsystem: "com.stoobit.analytics", category: "core"
+)
