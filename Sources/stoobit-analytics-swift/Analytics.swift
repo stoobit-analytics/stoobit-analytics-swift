@@ -68,15 +68,19 @@ open class Analytics {
         }
     }
     
-    public static func track(_ event: String, properties: [String: Any]) {
+    public static func track(_ event: String, properties: [String: Any] = [:]) {
         do {
+            let defaultData = try JSONSerialization.data(
+                withJSONObject: Data(), options: [] // TODO
+            )
+            
             let customData = try JSONSerialization.data(
                 withJSONObject: properties, options: []
             )
             
             let event = Event(
                 name: event,
-                defaultProps: Data(),
+                defaultProps: defaultData,
                 customProps: customData
             )
             
