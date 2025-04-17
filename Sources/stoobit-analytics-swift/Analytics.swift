@@ -27,14 +27,9 @@ open class Analytics {
         analyticsLogger
             .info("Analytics initialized successfully.")
         
-        // Load Unflushed Values
-        let defaults = UserDefaults.standard
-        let eventKey = Analytics.shared.eventKey
-        
-        if let stored = defaults.array(forKey: eventKey) as? [Event] {
-            Analytics.shared.events = stored
-            flush()
-        }
+        // Load Unflushed Events and Flush
+        Analytics.shared.load()
+        flush()
         
         // Set Timer
         Timer
@@ -45,10 +40,18 @@ open class Analytics {
             }
     }
     
+    // Manage Unflushed Events
+    internal func load() {
+        let defaults = UserDefaults.standard
+        if let stored = defaults.data(forKey: eventKey) {
+            events = Archiver().events(from: stored)
+        }
+    }
+    
     internal func store() {
         UserDefaults.standard
             .set(
-                Analytics.shared.events,
+                Archiver().data(from: Analytics.shared.events),
                 forKey: Analytics.shared.eventKey
             )
     }
