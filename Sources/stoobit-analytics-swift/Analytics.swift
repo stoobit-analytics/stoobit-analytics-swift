@@ -15,21 +15,42 @@ open class Analytics {
     
     // Analytics Properties
     let url = URL(string: "https://analyticsapi.stoobit.com/track")!
+    let eventKey = "com.stoobit.eventkey"
     
     internal var key: String = ""
     internal var events: [Event] = []
     
     // Initialization
     public static func initialize(with key: Key, interval: TimeInterval = 60) {
+        // Set Key
         Analytics.shared.key = key
-        analyticsLogger.info("Analytics initialized successfully.")
+        analyticsLogger
+            .info("Analytics initialized successfully.")
         
+        // Load Unflushed Values
+        let defaults = UserDefaults.standard
+        let eventKey = Analytics.shared.eventKey
+        
+        if let stored = defaults.array(forKey: eventKey) as? [Event] {
+            Analytics.shared.events = stored
+            flush()
+        }
+        
+        // Set Timer
         Timer
             .scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
                 Task { @MainActor in
                     flush()
                 }
             }
+    }
+    
+    internal func store() {
+        UserDefaults.standard
+            .set(
+                Analytics.shared.events,
+                forKey: Analytics.shared.eventKey
+            )
     }
 }
 

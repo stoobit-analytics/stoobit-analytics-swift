@@ -40,15 +40,14 @@ extension Analytics {
                     }
                     
                     Analytics.shared.events.removeAll()
+                    Analytics.shared.store()
                     
-                    analyticsLogger.info(
-                        "Analytics flushed successfully."
-                    )
+                    analyticsLogger
+                        .info("Analytics flushed successfully.")
                 }
             } catch {
-                analyticsLogger.error(
-                    "Sending data to stoobit analytics failed."
-                )
+                analyticsLogger
+                    .error("Sending data to stoobit analytics failed.")
             }
         }
     }

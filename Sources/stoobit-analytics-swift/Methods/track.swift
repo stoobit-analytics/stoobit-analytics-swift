@@ -25,6 +25,7 @@ extension Analytics {
             )
             
             Analytics.shared.events.append(event)
+            Analytics.shared.store()
         } catch {
             analyticsLogger.error(
                 "Converting provided properties to JSON failed."

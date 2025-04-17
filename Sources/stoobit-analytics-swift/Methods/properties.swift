@@ -17,7 +17,7 @@ extension Analytics {
 #if os(macOS)
         
 #else
-        print(UIDevice.current.model)
+//        print(UIDevice.current.model)
 #endif
         return [:]
     }

@@ -25,21 +25,6 @@ func getDeviceIdentifier() -> String {
     return identifier
 }
 
-func getPublicIPAddress() async -> String? {
-    guard let url = URL(string: "https://api.ipify.org?format=text") else {
-        return nil
-    }
-
-    do {
-        let (data, _) = try await URLSession.shared.data(from: url)
-        let ip = String(data: data, encoding: .utf8)
-        return ip
-    } catch {
-        print("Failed to fetch IP:", error)
-        return nil
-    }
-}
-
 struct Test {
     @Test func test() async throws {
         print(getDeviceIdentifier()) // iPhone 16
@@ -47,11 +32,5 @@ struct Test {
         
         await print(UIDevice.current.systemName) // iOS
         await print(UIDevice.current.systemVersion) // 18.1
-        
-        if let ip = await getPublicIPAddress() {
-               print("Public IP: \(ip)")
-           } else {
-               print("Keine IP erhalten")
-           }
     }
 }
