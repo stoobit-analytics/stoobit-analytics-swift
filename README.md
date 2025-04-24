@@ -6,7 +6,7 @@ You can install the Swift library by using Swift Package Manager.
 ```
 https://github.com/stoobit-analytics/stoobit-analytics-swift
 ```
-After installing the library, import Analytics in the application entry point (e.g. MyApp.swift), and initialize stoobit analytics within the App struct’s initializer.
+After installing the library, import `Analytics` in the application entry point (e.g. MyApp.swift), and initialize **stoobit analytics** within the App `struct`’s initializer.
 ```swift
 import Analytics
 import SwiftUI
