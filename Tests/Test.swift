@@ -8,7 +8,7 @@
 import Testing
 import Foundation
 import SystemConfiguration.CaptiveNetwork
-import UIKit
+import AppKit
 
 @testable import Analytics
 
@@ -27,10 +27,13 @@ func getDeviceIdentifier() -> String {
 
 struct Test {
     @Test func test() async throws {
-        await print("Model:", UIDevice.current.model)
-        print("Model Version:", getDeviceIdentifier())
-        
-        await print("OS:", UIDevice.current.systemName)
-        await print("OS Version:", UIDevice.current.systemVersion)
+        let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+        let version = "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
+
+        print( [
+            "user_id": UUID().uuidString,
+            "os": "macOS",
+            "os_version": version,
+        ] )
     }
 }

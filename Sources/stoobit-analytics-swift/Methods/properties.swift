@@ -13,12 +13,22 @@ import UIKit
 #endif
 
 extension Analytics {
-    internal static func properties() -> [String: Any] {
+    internal func properties() -> [String: Any] {
 #if os(macOS)
-        
+        let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+        let version = "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
+
+        return [
+            "user_id": self.id,
+            "os": "macOS",
+            "os_version": version,
+        ]
 #else
-//        print(UIDevice.current.model)
+        return [
+            "user_id": self.id,
+            "os": UIDevice.current.systemName,
+            "os_version": UIDevice.current.systemVersion,
+        ]
 #endif
-        return [:]
     }
 }
