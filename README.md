@@ -42,3 +42,7 @@ Analytics.track("Sign In", properties: ["Plan": "Premium"])
 ```
 
 ### Flushing Events
+Call `.flush()` manually if you want to force a flush at a particular moment.
+```swift
+ Analytics.flush()
+```
