@@ -33,5 +33,12 @@ Analytics.initialize(with: "API Key", interval: 60)
 ```
 
 ### Sending Events
+Use `.track(_ event: String, properties: [String: Any])` to send an event by providing the event name and, optionally, any event properties.
+```swift
+Analytics.track("Sign In")
+```
+```swift
+Analytics.track("Sign In", properties: ["Plan": "Premium"])
+```
 
 ### Flushing Events
