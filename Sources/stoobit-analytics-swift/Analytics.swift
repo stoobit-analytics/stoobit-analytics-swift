@@ -14,7 +14,7 @@ open class Analytics {
     public static let shared = Analytics()
     
     // Analytics Properties
-    let url = URL(string: "https://analyticsapi.stoobit.com/track")!
+    var url = URL(string: "https://analyticsapi.stoobit.com/track")!
     let eventKey = "com.stoobit.eventkey"
     
     internal var id: String = ""
@@ -58,6 +58,11 @@ open class Analytics {
                 Archiver().data(from: Analytics.shared.events),
                 forKey: Analytics.shared.eventKey
             )
+    }
+    
+    // Custom URL for Debug Purposes
+    public static func _setURL(to url: String) {
+        Analytics.shared.url = URL(string: url)!
     }
 }
 
