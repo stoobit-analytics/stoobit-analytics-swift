@@ -17,11 +17,15 @@ open class Analytics {
     let url = URL(string: "https://analyticsapi.stoobit.com/track")!
     let eventKey = "com.stoobit.eventkey"
     
+    internal var id: String = ""
     internal var key: String = ""
     internal var events: [Event] = []
     
     // Initialization
     public static func initialize(with key: Key, interval: TimeInterval = 60) {
+        // Load ID
+        Analytics.shared.loadID()
+        
         // Set Key
         Analytics.shared.key = key
         analyticsLogger

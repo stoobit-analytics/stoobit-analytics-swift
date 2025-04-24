@@ -27,10 +27,10 @@ func getDeviceIdentifier() -> String {
 
 struct Test {
     @Test func test() async throws {
-        print(getDeviceIdentifier()) // iPhone 16
-        await print(UIDevice.current.model) // iPhone
+        await print("Model:", UIDevice.current.model)
+        print("Model Version:", getDeviceIdentifier())
         
-        await print(UIDevice.current.systemName) // iOS
-        await print(UIDevice.current.systemVersion) // 18.1
+        await print("OS:", UIDevice.current.systemName)
+        await print("OS Version:", UIDevice.current.systemVersion)
     }
 }
