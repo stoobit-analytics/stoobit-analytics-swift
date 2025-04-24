@@ -26,9 +26,10 @@ struct MyApp: App {
 ```
 
 ### Library Configuration
+The **stoobit analytics** library doesn’t send the events you record immediately. Instead, it sends batches every 60 seconds while your application is running. You can customize this time interval within the SDK's initializer.
 
 ```swift
-
+Analytics.initialize(with: "API Key", interval: 60)
 ```
 
 ### Sending Events
