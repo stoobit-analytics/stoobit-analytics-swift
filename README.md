@@ -37,6 +37,7 @@ Use `.track(_ event: String, properties: [String: Any])` to send an event by pro
 ```swift
 Analytics.track("Sign In")
 ```
+or
 ```swift
 Analytics.track("Sign In", properties: ["Plan": "Premium"])
 ```
