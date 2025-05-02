@@ -1,4 +1,7 @@
 # stoobit analytics SDK Swift
+> [!NOTE]  
+> Work in progress: We are updating the SDK from a singleton to a builder pattern.
+
 ### Installing the Library
 You can install the Swift library by using Swift Package Manager.
 1. In Xcode, select File > Add Packages…
