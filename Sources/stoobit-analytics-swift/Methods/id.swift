@@ -13,7 +13,8 @@ extension Analytics {
         if let stored = defaults.string(forKey: "com.stoobit.id") {
             self.id = stored
         } else {
-            defaults.set(UUID().uuidString, forKey: "com.stoobit.id")
+            self.id = UUID().uuidString
+            defaults.set(self.id, forKey: "com.stoobit.id")
         }
     }
 }
