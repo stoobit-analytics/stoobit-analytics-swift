@@ -6,10 +6,10 @@ import PackageDescription
 let package = Package(
     name: "stoobit-analytics-swift",
     platforms: [
-        .iOS(.v14),
-        .tvOS(.v14),
-        .macOS(.v11),
-        .watchOS(.v7),
+        .iOS(.v17),
+        .tvOS(.v17),
+        .macOS(.v14),
+        .watchOS(.v10),
         .visionOS(.v1)
     ],
     products: [
