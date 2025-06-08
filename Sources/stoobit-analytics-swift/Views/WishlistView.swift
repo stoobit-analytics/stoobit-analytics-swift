@@ -47,9 +47,7 @@ struct WishlistView: View {
         }
     }
     
-    func loadWishes() async {
-        
-    }
+    func loadWishes() async { }
 }
 
 #Preview {
