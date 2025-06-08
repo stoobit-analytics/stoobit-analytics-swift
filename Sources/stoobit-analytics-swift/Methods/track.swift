@@ -8,15 +8,13 @@
 import Foundation
 
 extension Analytics {
-    public static func track(_ event: String, properties: [String: Any] = [:]) {
+    public func track(_ event: String, properties: [String: Any] = [:]) {
         do {
-            let defaultData = try JSONSerialization.data(
-                withJSONObject: Analytics.shared.properties(), options: []
-            )
+            let defaultData = try JSONSerialization
+                .data(withJSONObject: self.properties(), options: [])
             
-            let customData = try JSONSerialization.data(
-                withJSONObject: properties, options: []
-            )
+            let customData = try JSONSerialization
+                .data(withJSONObject: properties, options: [])
             
             let event = Event(
                 name: event,
@@ -24,12 +22,14 @@ extension Analytics {
                 customProps: customData
             )
             
-            Analytics.shared.events.append(event)
-            Analytics.shared.store()
+            self.events.append(event)
+            self.store()
         } catch {
-            analyticsLogger.error(
-                "Converting provided properties to JSON failed."
-            )
+            if isDebuggerEnabled {
+                Log.error(
+                    "Tracking failed with error: \(error)"
+                )
+            }
         }
     }
 }

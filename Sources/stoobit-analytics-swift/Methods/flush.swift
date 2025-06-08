@@ -8,27 +8,23 @@
 import Foundation
 
 extension Analytics {
-    public static func flush() {
+    public func flush() {
         Task {
             do {
-                if Analytics.shared.events.isEmpty == false {
-                    var request = URLRequest(url: Analytics.shared.url)
+                if events.isEmpty == false {
+                    var request = URLRequest(url: self.url)
                     request.httpMethod = "POST"
                     
                     request.setValue(
-                        Analytics.shared.key,
-                        forHTTPHeaderField: "Authorization"
+                        key, forHTTPHeaderField: "Authorization"
                     )
                     request.setValue(
-                        "application/json", 
-                        forHTTPHeaderField: "Content-Type"
+                        "application/json", forHTTPHeaderField: "Content-Type"
                     )
                     
                     let encoder = JSONEncoder()
                     encoder.dateEncodingStrategy = .iso8601
-                    request.httpBody = try encoder.encode(
-                        Analytics.shared.events
-                    )
+                    request.httpBody = try encoder.encode(events)
                     
                     let (_, response) = try await URLSession
                         .shared.data(for: request)
@@ -39,15 +35,19 @@ extension Analytics {
                         throw AnalyticsError.flushFailed
                     }
                     
-                    Analytics.shared.events.removeAll()
-                    Analytics.shared.store()
+                    self.events.removeAll()
+                    self.store()
                     
-                    analyticsLogger
-                        .info("Analytics flushed successfully.")
+                    if isDebuggerEnabled {
+                        Log
+                            .info("Events flushed successfully.")
+                    }
                 }
             } catch {
-                analyticsLogger
-                    .error("Sending data to stoobit analytics failed.")
+                if isDebuggerEnabled {
+                    Log
+                        .error("Sending events failed with error: \(error)")
+                }
             }
         }
     }

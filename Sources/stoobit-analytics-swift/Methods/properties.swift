@@ -19,13 +19,13 @@ extension Analytics {
         let version = "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
 
         return [
-            "user_id": self.id,
+            "user_id": self.userID,
             "os": "macOS",
             "os_version": version,
         ]
 #else
         return [
-            "user_id": self.id,
+            "user_id": self.userID,
             "os": UIDevice.current.systemName,
             "os_version": UIDevice.current.systemVersion,
         ]
