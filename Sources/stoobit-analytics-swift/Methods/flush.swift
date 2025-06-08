@@ -7,48 +7,48 @@
 
 import Foundation
 
-//extension Analytics {
-//    public static func flush() {
-//        Task {
-//            do {
-//                if Analytics.shared.events.isEmpty == false {
-//                    var request = URLRequest(url: Analytics.shared.url)
-//                    request.httpMethod = "POST"
-//                    
-//                    request.setValue(
-//                        Analytics.shared.key,
-//                        forHTTPHeaderField: "Authorization"
-//                    )
-//                    request.setValue(
-//                        "application/json", 
-//                        forHTTPHeaderField: "Content-Type"
-//                    )
-//                    
-//                    let encoder = JSONEncoder()
-//                    encoder.dateEncodingStrategy = .iso8601
-//                    request.httpBody = try encoder.encode(
-//                        Analytics.shared.events
-//                    )
-//                    
-//                    let (_, response) = try await URLSession
-//                        .shared.data(for: request)
-//                    
-//                    if let httpResponse = response as? HTTPURLResponse,
-//                       httpResponse.statusCode != 200
-//                    {
-//                        throw AnalyticsError.flushFailed
-//                    }
-//                    
-//                    Analytics.shared.events.removeAll()
-//                    Analytics.shared.store()
-//                    
-//                    analyticsLogger
-//                        .info("Analytics flushed successfully.")
-//                }
-//            } catch {
-//                analyticsLogger
-//                    .error("Sending data to stoobit analytics failed.")
-//            }
-//        }
-//    }
-//}
+extension Analytics {
+    public func flush() {
+        Task {
+            do {
+                if events.isEmpty == false {
+                    var request = URLRequest(url: self.url)
+                    request.httpMethod = "POST"
+                    
+                    request.setValue(
+                        key, forHTTPHeaderField: "Authorization"
+                    )
+                    request.setValue(
+                        "application/json", forHTTPHeaderField: "Content-Type"
+                    )
+                    
+                    let encoder = JSONEncoder()
+                    encoder.dateEncodingStrategy = .iso8601
+                    request.httpBody = try encoder.encode(events)
+                    
+                    let (_, response) = try await URLSession
+                        .shared.data(for: request)
+                    
+                    if let httpResponse = response as? HTTPURLResponse,
+                       httpResponse.statusCode != 200
+                    {
+                        throw AnalyticsError.flushFailed
+                    }
+                    
+                    self.events.removeAll()
+                    self.store()
+                    
+                    if isDebuggerEnabled {
+                        Log
+                            .info("Events flushed successfully.")
+                    }
+                }
+            } catch {
+                if isDebuggerEnabled {
+                    Log
+                        .error("Sending events failed with error: \(error)")
+                }
+            }
+        }
+    }
+}
