@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Wish: Codable {
+struct Wish: Codable, Identifiable, Hashable {
     var id: UUID
     
     init(title: String, description: String) {
@@ -19,6 +19,7 @@ struct Wish: Codable {
     }
     
     var title: String
+    var upvotes: Int = 0
     var timestamp: Date
     var description: String
 }
