@@ -20,3 +20,12 @@ struct SearchModifier: ViewModifier {
         }
     }
 }
+
+
+public extension View {
+    @ViewBuilder
+    func searchable(hidden: Bool, text: Binding<String>) -> some View {
+        modifier(SearchModifier(hidden: hidden, text: text))
+    }
+}
+
