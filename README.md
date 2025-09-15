@@ -51,7 +51,3 @@ To manually send all pending events, call `.flush()` at a specific moment — su
 ```swift
  analytics.flush()
 ```
-
-### Push-Notifications
-
-
