@@ -8,10 +8,11 @@
 import Foundation
 
 extension Analytics {
-    public func registerForPushNotifications(with token: Data) {
+    public func registerForPushNotifications(
+        with token: Data, environment: Environment = .production
+    ) {
         Task {
-            let domain = "analyticsapi.stoobit.com/push-notifications/"
-            guard let url = URL(string: "https://\(domain)\(key)") else {
+            guard let url = URL(string: "\(environment.url)/\(key)") else {
                 return
             }
             
@@ -49,6 +50,20 @@ extension Analytics {
             
             if isDebuggerEnabled {
                 Log.info("Push notifications registered successfully.")
+            }
+        }
+    }
+    
+    public enum Environment {
+        case testing
+        case production
+        
+        var url: String {
+            switch self {
+            case .testing:
+                "http://localhost:3456/push-notifications"
+            case .production:
+                "https://analyticsapi.stoobit.com/push-notifications"
             }
         }
     }
