@@ -12,44 +12,44 @@ extension Analytics {
         with token: Data, environment: Environment = .production
     ) {
         Task {
-            guard let url = URL(string: "\(environment.url)/\(key)") else {
-                return
-            }
-            
-            let token = token.map { String(format: "%02x", $0) }.joined()
-            let registration = NotificationRegistration(
-                userID: self.userID, token: token, language: languageID()
-            )
-            
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            
-            request.setValue(
-                key, forHTTPHeaderField: "Authorization"
-            )
-            request.setValue(
-                "application/json", forHTTPHeaderField: "Content-Type"
-            )
-            
-            let encoder = JSONEncoder()
-            encoder.dateEncodingStrategy = .iso8601
-            request.httpBody = try encoder.encode(registration)
-            
-            let (_, response) = try await URLSession
-                .shared.data(for: request)
-            
-            if let httpResponse = response as? HTTPURLResponse,
-               httpResponse.statusCode != 200
-            {
-                if isDebuggerEnabled {
-                    Log.info("Push notification registration failed.")
+            do {
+                guard let url = URL(string: "\(environment.url)/\(key)") else {
+                    return
                 }
                 
-                throw AnalyticsError.notificationRegistrationFailed
-            }
-            
-            if isDebuggerEnabled {
-                Log.info("Push notifications registered successfully.")
+                let token = token.map { String(format: "%02x", $0) }.joined()
+                let registration = NotificationRegistration(
+                    userID: self.userID, token: token, language: languageID()
+                )
+                
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.setValue(
+                    "application/json", forHTTPHeaderField: "Content-Type"
+                )
+                
+                let encoder = JSONEncoder()
+                encoder.dateEncodingStrategy = .iso8601
+                request.httpBody = try encoder.encode(registration)
+                
+                let (_, response) = try await URLSession
+                    .shared.data(for: request)
+                
+                if let httpResponse = response as? HTTPURLResponse,
+                   httpResponse.statusCode != 200
+                {
+                    if isDebuggerEnabled {
+                        Log.info("Push notification registration failed with code \(httpResponse.statusCode).")
+                    }
+                    
+                    throw AnalyticsError.notificationRegistrationFailed
+                }
+                
+                if isDebuggerEnabled {
+                    Log.info("Push notifications registered successfully.")
+                }
+            } catch {
+                Log.info("Error: \(error)")
             }
         }
     }

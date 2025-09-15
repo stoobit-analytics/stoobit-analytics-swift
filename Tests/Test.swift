@@ -14,12 +14,8 @@ import SystemConfiguration.CaptiveNetwork
 struct Test {
     @Test func test() async throws {
         let analytics = Analytics(
-            key: "1fafa0f31d10d9725fac48d5f1dbae2e",
-            interval: 60,
-            debuggingEnabled: true
+            key: "82da5f6314d72a14a4f80ca2983a1fe8", debuggingEnabled: true
         )
-        
-        analytics.track("File Upload", properties: ["filetype": "pages"])
-        analytics.flush()
+        analytics.registerForPushNotifications(with: Data(), environment: .testing)
     }
 }
