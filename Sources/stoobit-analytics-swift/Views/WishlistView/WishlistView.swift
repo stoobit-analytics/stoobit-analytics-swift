@@ -41,6 +41,7 @@ struct WishlistView: View {
             }
             .sheet(item: $selectedWish) { wish in
                 WishView(wish: wish)
+                    .presentationDetents([.medium])
             }
         }
         .environment(manager)

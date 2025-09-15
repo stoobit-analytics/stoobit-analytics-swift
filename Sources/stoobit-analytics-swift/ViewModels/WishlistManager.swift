@@ -11,8 +11,14 @@ import Foundation
     var filter: Filter = .suggestions
     var wishes: [Wish] = [
         Wish(
-            title: "Support for German",
-            description: "Please add support for other languages, like German. Please add support for other languages, like German. Please add support for other languages, like German. Please add support for other languages, like German. Please add support for other languages, like German. Please add support for other languages, like German. Please add support for other languages, like German. Please add support for other languages, like German. "
+            title: "Language Support",
+            description: "Please add support for more languages, like German, French & Italian.",
+            upvotes: 51
+        ),
+        Wish(
+            title: "Dark Mode",
+            description: "Please add a dark mode to stoobit analytics.",
+            upvotes: 122
         )
     ]
     
