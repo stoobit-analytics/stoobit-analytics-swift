@@ -12,7 +12,7 @@ struct LikeButton: View {
     var action: () -> Void
     
     var body: some View {
-        if #available(iOS 26, *) {
+        if #available(iOS 26.0, *), #available(macOS 26.0, *) {
             Image(systemName: "heart")
                 .foregroundStyle(isSelected ? Color.white : Color.red)
                 .symbolVariant(
