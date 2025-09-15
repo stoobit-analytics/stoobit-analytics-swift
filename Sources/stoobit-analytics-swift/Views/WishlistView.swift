@@ -70,7 +70,7 @@ struct WishlistView: View {
                 }
                 
                 
-                if #available(iOS 26.0, *) {
+                if #available(iOS 26.0, *), #available(macOS 26.0, *) {
                     ToolbarSpacer(.fixed, placement: .primaryAction)
                 }
                 
