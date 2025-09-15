@@ -9,4 +9,5 @@ import Foundation
 
 enum AnalyticsError: Error {
     case flushFailed
+    case notificationRegistrationFailed
 }
