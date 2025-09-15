@@ -19,7 +19,8 @@ extension Analytics {
                 
                 let token = token.map { String(format: "%02x", $0) }.joined()
                 let registration = NotificationRegistration(
-                    userID: self.userID, token: token, language: languageID()
+                    userID: self.userID, token: token,
+                    language: languageID(), bundleIdentifier: bundleID()
                 )
                 
                 var request = URLRequest(url: url)

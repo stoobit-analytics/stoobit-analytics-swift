@@ -9,12 +9,13 @@ import Foundation
 
 struct NotificationRegistration: Codable {
     var userID: String
-    
     var token: String
+    
     var language: String
+    var bundleIdentifier: String
     
     enum CodingKeys: String, CodingKey {
         case userID = "userid"
-        case token, language
+        case token, language, bundleIdentifier
     }
 }

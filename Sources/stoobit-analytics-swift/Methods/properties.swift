@@ -35,4 +35,8 @@ extension Analytics {
     internal func languageID() -> String {
         return Locale.current.language.languageCode?.identifier ?? ""
     }
+    
+    internal func bundleID() -> String {
+        return Bundle.main.bundleIdentifier ?? ""
+    }
 }
