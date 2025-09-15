@@ -52,5 +52,6 @@ To manually send all pending events, call `.flush()` at a specific moment — su
  analytics.flush()
 ```
 
-### Wishlist
+### Push-Notifications
+
 

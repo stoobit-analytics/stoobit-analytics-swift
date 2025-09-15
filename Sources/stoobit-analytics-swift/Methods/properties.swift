@@ -31,4 +31,8 @@ extension Analytics {
         ]
 #endif
     }
+    
+    internal func languageID() -> String {
+        return Locale.current.language.languageCode?.identifier ?? ""
+    }
 }
