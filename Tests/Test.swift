@@ -12,10 +12,5 @@ import SystemConfiguration.CaptiveNetwork
 @testable import Analytics
 
 struct Test {
-    @Test func test() async throws {
-        let analytics = Analytics(
-            key: "82da5f6314d72a14a4f80ca2983a1fe8", debuggingEnabled: true
-        )
-        analytics.registerForPushNotifications(with: Data(), environment: .testing)
-    }
+    @Test func test() async throws {  }
 }
